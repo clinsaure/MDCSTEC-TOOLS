@@ -1,17 +1,32 @@
 ﻿@typeparam TItem;
 @inject IJSRuntime JSRuntime
 
-<br/>
+<br />
 <MudText Typo="Typo.h4" GutterBottom="true" Align="Align.Center">@TableName</MudText>
 
 <MudDataGrid T="TItem" MultiSelection="false" Items="@Items" Sortable="true" Filterable="true" QuickFilter="@_quickFilter"
-             Hideable="true" Hover="true" Dense="true" Bordered="true" Striped="true" ReadOnly="false" EditMode="DataGridEditMode.Form" EditTrigger="DataGridEditTrigger.OnRowClick">
+             Hideable="true" Hover="true" Dense="true" Bordered="true" Striped="true" ReadOnly="true" EditMode="DataGridEditMode.Form" EditTrigger="DataGridEditTrigger.OnRowClick">
     <ToolBarContent>
         <MudText Typo="Typo.h6">@TableName</MudText>
         <MudSpacer />
-        <MudButton OnClick="ExportToExcel" Disabled="@(Items.Count() <= 0)" Color="Color.Tertiary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ArrowDownward" Class="mr-1">Excel Export</MudButton>
-        <MudButton OnClick="ClearTable" Disabled="@(Items.Count() <= 0)" Color="Color.Error" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Clear">Clear Table</MudButton>
-        <MudSpacer />
+        @switch (@ExportFile)
+        {
+            case "Excel":
+                <MudButton OnClick="ExportToExcel" Disabled="@(Items.Count() <= 0)" Color="Color.Tertiary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ArrowDownward" Class="mr-1">Excel Export</MudButton>
+                <MudButton OnClick="ClearTable" Disabled="@(Items.Count() <= 0)" Color="Color.Error" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Clear">Clear Table</MudButton>
+                <MudSpacer />
+                break;
+            case "Pdf":
+                <MudButton OnClick="ExportToPdf" Disabled="@(Items.Count() <= 0)" Color="Color.Tertiary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ArrowDownward" Class="mr-1">Pdf Download</MudButton>
+                <MudSpacer />
+                break;
+            default:
+                 <MudButton OnClick="ExportToExcel" Disabled="@(Items.Count() <= 0)" Color="Color.Tertiary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ArrowDownward" Class="mr-1">Excel Export</MudButton>
+                <MudButton OnClick="ClearTable" Disabled="@(Items.Count() <= 0)" Color="Color.Error" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Clear">Clear Table</MudButton>
+                <MudSpacer />
+                break;
+        }
+
         <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
@@ -28,7 +43,7 @@
     </PagerContent>
 </MudDataGrid>
 
-@code 
+@code
 {
 
     [Parameter]
@@ -39,6 +54,9 @@
     public List<string> Props { get; set; }
     [Parameter]
     public string TableName { get; set; }
+    /*Excel or Pdf*/
+    [Parameter]
+    public string ExportFile { get; set; }
 
     private string _searchString = string.Empty;
 
@@ -53,16 +71,16 @@
     // quick filter - filter gobally across multiple columns with the same input
     private Func<TItem, bool> _quickFilter => x =>
     {
-      if (string.IsNullOrWhiteSpace(_searchString))
-          return true;
+        if (string.IsNullOrWhiteSpace(_searchString))
+            return true;
 
-      foreach (var prop in Props)
+        foreach (var prop in Props)
         {
-          if (x.GetType().GetProperty(prop).GetValue(x, null).ToString().Contains(_searchString, StringComparison.OrdinalIgnoreCase))
-              return true;
-    }
+            if (x.GetType().GetProperty(prop).GetValue(x, null).ToString().Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
 
-      return false;
+        return false;
     };
 
     public async Task ExportToExcel()
@@ -106,6 +124,17 @@
                 await JSRuntime.InvokeAsync<object>("saveAsFile", fileName, Convert.ToBase64String(content));
             }
         }
+    }
+
+    public async Task ExportToPdf()
+    {
+        //foreach (var item in Items)
+        //{
+        //    foreach (var prop in Props)
+        //    {
+        //        Console.WriteLine(item.GetType().GetProperty(prop).GetValue(item, null));
+        //    }
+        //}
     }
 
 }

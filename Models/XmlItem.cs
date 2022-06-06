@@ -17,13 +17,13 @@ namespace MdcstecTools.Models
 		public double DbVersion { get; set; }
 
 		[XmlElement(ElementName = "DbDesc")]
-		public string DbDesc { get; set; }
+		public string? DbDesc { get; set; }
 
 		[XmlElement(ElementName = "DbGUID")]
-		public string DbGUID { get; set; }
+		public string? DbGUID { get; set; }
 
 		[XmlElement(ElementName = "DbLangID")]
-		public string DbLangID { get; set; }
+		public string? DbLangID { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "Coord")]
@@ -48,46 +48,46 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "BlockName")]
-		public string BlockName { get; set; }
+		public string? BlockName { get; set; }
 
 		[XmlElement(ElementName = "EntityName")]
-		public string EntityName { get; set; }
+		public string? EntityName { get; set; }
 
 		[XmlElement(ElementName = "BlockId")]
 		public int BlockId { get; set; }
 
 		[XmlElement(ElementName = "BlockGUID")]
-		public string BlockGUID { get; set; }
+		public string? BlockGUID { get; set; }
 
 		[XmlElement(ElementName = "BlockDesc")]
-		public string BlockDesc { get; set; }
+		public string? BlockDesc { get; set; }
 
 		[XmlElement(ElementName = "TemplateName")]
-		public string TemplateName { get; set; }
+		public string? TemplateName { get; set; }
 
 		[XmlElement(ElementName = "ClassName")]
-		public string ClassName { get; set; }
+		public string? ClassName { get; set; }
 
 		[XmlElement(ElementName = "BaseTemplateName")]
-		public string BaseTemplateName { get; set; }
+		public string? BaseTemplateName { get; set; }
 
 		[XmlElement(ElementName = "CreateType")]
-		public object CreateType { get; set; }
+		public object? CreateType { get; set; }
 
 		[XmlElement(ElementName = "Attribute")]
 		public int Attribute { get; set; }
 
 		[XmlElement(ElementName = "Coord")]
-		public Coord Coord { get; set; }
+		public Coord? Coord { get; set; }
 
 		[XmlElement(ElementName = "LifeCycleState")]
-		public string LifeCycleState { get; set; }
+		public string? LifeCycleState { get; set; }
 
 		[XmlElement(ElementName = "AssignedTo")]
-		public string AssignedTo { get; set; }
+		public string? AssignedTo { get; set; }
 
 		[XmlElement(ElementName = "Container")]
-		public object Container { get; set; }
+		public object? Container { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "Parameter")]
@@ -95,10 +95,10 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "ParamName")]
-		public string ParamName { get; set; }
+		public string? ParamName { get; set; }
 
 		[XmlElement(ElementName = "ParamValue")]
-		public string ParamValue { get; set; }
+		public string? ParamValue { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "Parameters")]
@@ -106,7 +106,7 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "Parameter")]
-		public List<Parameter> Parameter { get; set; }
+		public List<Parameter>? Parameter { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "SymbolAttr")]
@@ -114,19 +114,19 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "ParamName")]
-		public string ParamName { get; set; }
+		public string? ParamName { get; set; }
 
 		[XmlElement(ElementName = "AttrType")]
-		public string AttrType { get; set; }
+		public string? AttrType { get; set; }
 
 		[XmlElement(ElementName = "AttrOrder")]
 		public int AttrOrder { get; set; }
 
 		[XmlElement(ElementName = "AttrViewValue")]
-		public string AttrViewValue { get; set; }
+		public string? AttrViewValue { get; set; }
 
 		[XmlElement(ElementName = "AttrViewLabel")]
-		public string AttrViewLabel { get; set; }
+		public string? AttrViewLabel { get; set; }
 
 		[XmlElement(ElementName = "XCoord")]
 		public int XCoord { get; set; }
@@ -140,7 +140,7 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "SymbolAttr")]
-		public List<SymbolAttr> SymbolAttr { get; set; }
+		public List<SymbolAttr>? SymbolAttr { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "Vertex")]
@@ -148,10 +148,10 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "XVertex")]
-		public int XVertex { get; set; }
+		public int? XVertex { get; set; }
 
 		[XmlElement(ElementName = "YVertex")]
-		public int YVertex { get; set; }
+		public int? YVertex { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "Connection")]
@@ -159,22 +159,22 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "BlockId")]
-		public int BlockId { get; set; }
+		public int? BlockId { get; set; }
 
 		[XmlElement(ElementName = "InputEnd")]
-		public string InputEnd { get; set; }
+		public string? InputEnd { get; set; }
 
 		[XmlElement(ElementName = "OutputEnd")]
-		public string OutputEnd { get; set; }
+		public string? OutputEnd { get; set; }
 
 		[XmlElement(ElementName = "ConnectionForm")]
-		public string ConnectionForm { get; set; }
+		public string? ConnectionForm { get; set; }
 
 		[XmlElement(ElementName = "GraphicalForm")]
-		public string GraphicalForm { get; set; }
+		public string? GraphicalForm { get; set; }
 
 		[XmlElement(ElementName = "Vertex")]
-		public List<Vertex> Vertex { get; set; }
+		public List<Vertex>? Vertex { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "Connections")]
@@ -182,7 +182,7 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "Connection")]
-		public List<Connection> Connection { get; set; }
+		public List<Connection>? Connection { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "Block")]
@@ -190,19 +190,19 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "BlockDef")]
-		public BlockDef BlockDef { get; set; }
+		public BlockDef? BlockDef { get; set; }
 
 		[XmlElement(ElementName = "Parameters")]
-		public Parameters Parameters { get; set; }
+		public Parameters? Parameters { get; set; }
 
 		[XmlElement(ElementName = "SymbolAttrs")]
-		public SymbolAttrs SymbolAttrs { get; set; }
+		public SymbolAttrs? SymbolAttrs { get; set; }
 
 		[XmlElement(ElementName = "Connections")]
-		public Connections Connections { get; set; }
+		public Connections? Connections { get; set; }
 
 		[XmlElement(ElementName = "EmbBlocks")]
-		public EmbBlocks EmbBlocks { get; set; }
+		public EmbBlocks? EmbBlocks { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "EmbBlocks")]
@@ -210,7 +210,7 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "Block")]
-		public List<Block> Block { get; set; }
+		public List<Block>? Block { get; set; }
 	}
 
 	[Serializable, XmlRoot(ElementName = "MultiBlock")]
@@ -218,10 +218,10 @@ namespace MdcstecTools.Models
 	{
 
 		[XmlElement(ElementName = "ErdbVersion")]
-		public ErdbVersion ErdbVersion { get; set; }
+		public ErdbVersion? ErdbVersion { get; set; }
 
 		[XmlElement(ElementName = "Block")]
-		public Block Block { get; set; }
+		public Block? Block { get; set; }
 
 		//[XmlAttribute(AttributeName = "xmlns")]
 		//public string Xmlns { get; set; }
