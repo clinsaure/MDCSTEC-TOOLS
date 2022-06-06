@@ -97,7 +97,8 @@
                 }
                 break;
             default:
-                // code block
+                <GridComponent T="ParameterDto" Items="ParameterDtos" Props="ParameterDtoProps" TableName="All Parameters" ExportFile="Pdf"></GridComponent>
+                <GridComponent T="ConnectionDto" Items="ConnectionDtos" Props="ConnectionDtoProps" TableName="All Connections"  ExportFile="Pdf"></GridComponent>
                 break;
         }
     </MudItem>
