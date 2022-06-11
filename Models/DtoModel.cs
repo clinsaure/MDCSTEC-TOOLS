@@ -35,4 +35,42 @@
         public string? BlockName { get; set; }
         public Connections? Connections { get; set; }
     }
+
+    public class BlockDto
+    {
+        public string? BlockName { get; set; }
+        public int BlockId { get; set; }
+    }
+
+    public class BlockDefDto
+    {
+
+        public string? BlockName { get; set; }
+
+        public string? EntityName { get; set; }
+
+        public int BlockId { get; set; }
+
+        public string? BlockGUID { get; set; }
+
+        public string? BlockDesc { get; set; }
+
+        public string? TemplateName { get; set; }
+
+        public string? ClassName { get; set; }
+
+        public string? BaseTemplateName { get; set; }
+
+        //public object? CreateType { get; set; }
+
+        public int Attribute { get; set; }
+
+        //public Coord? Coord { get; set; }
+
+        public string? LifeCycleState { get; set; }
+
+        public string? AssignedTo { get; set; }
+
+        //public object? Container { get; set; }
+    }
 }

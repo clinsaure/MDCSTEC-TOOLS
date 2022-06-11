@@ -1,7 +1,7 @@
 ﻿@typeparam TItem;
 @inject IJSRuntime JSRuntime
 
-<br />
+
 <MudText Typo="Typo.h4" GutterBottom="true" Align="Align.Center">@TableName</MudText>
 
 <MudDataGrid T="TItem" MultiSelection="false" Items="@Items" Sortable="true" Filterable="true" QuickFilter="@_quickFilter"
@@ -9,6 +9,7 @@
     <ToolBarContent>
         <MudText Typo="Typo.h6">@TableName</MudText>
         <MudSpacer />
+        @*<MudButton OnClick="ExportToPdf" Color="Color.Tertiary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ArrowDownward" Class="mr-1">Pdf Download</MudButton>*@
         @switch (@ExportFile)
         {
             case "Excel":
@@ -21,7 +22,7 @@
                 <MudSpacer />
                 break;
             default:
-                 <MudButton OnClick="ExportToExcel" Disabled="@(Items.Count() <= 0)" Color="Color.Tertiary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ArrowDownward" Class="mr-1">Excel Export</MudButton>
+                <MudButton OnClick="ExportToExcel" Disabled="@(Items.Count() <= 0)" Color="Color.Tertiary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ArrowDownward" Class="mr-1">Excel Export</MudButton>
                 <MudButton OnClick="ClearTable" Disabled="@(Items.Count() <= 0)" Color="Color.Error" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Clear">Clear Table</MudButton>
                 <MudSpacer />
                 break;
@@ -32,7 +33,7 @@
     </ToolBarContent>
     <Columns>
         @*<SelectColumn T="HtmlItem" />*@
-        @foreach (var prop in Props)
+        @foreach (string prop in Props)
         {
             <Column T="TItem" Field="@prop" />
         }
@@ -47,16 +48,18 @@
 {
 
     [Parameter]
-    public TItem T { get; set; }
+    public TItem? T { get; set; }
     [Parameter]
-    public List<TItem> Items { get; set; }
+    public List<TItem>? Items { get; set; }
     [Parameter]
-    public List<string> Props { get; set; }
+    public List<string>? Props { get; set; }
     [Parameter]
-    public string TableName { get; set; }
+    public string? TableName { get; set; }
     /*Excel or Pdf*/
     [Parameter]
-    public string ExportFile { get; set; }
+    public string? ExportFile { get; set; }
+    [Parameter]
+    public string? BlockName { get; set; }
 
     private string _searchString = string.Empty;
 
@@ -74,7 +77,7 @@
         if (string.IsNullOrWhiteSpace(_searchString))
             return true;
 
-        foreach (var prop in Props)
+        foreach (string prop in Props)
         {
             if (x.GetType().GetProperty(prop).GetValue(x, null).ToString().Contains(_searchString, StringComparison.OrdinalIgnoreCase))
                 return true;
@@ -107,7 +110,7 @@
             foreach (var item in Items)
             {
                 int i = 1;
-                foreach (var prop in Props)
+                foreach (string prop in Props)
                 {
                     worksheet.Cell(index + 1, i).Value = item.GetType().GetProperty(prop).GetValue(item, null);
                     i++;
@@ -126,15 +129,11 @@
         }
     }
 
+
     public async Task ExportToPdf()
     {
-        //foreach (var item in Items)
-        //{
-        //    foreach (var prop in Props)
-        //    {
-        //        Console.WriteLine(item.GetType().GetProperty(prop).GetValue(item, null));
-        //    }
-        //}
+        string TbName = BlockName + " - " + TableName;
+        await JSRuntime.InvokeAsync<object>("tableScript", Items, TbName);
     }
 
 }

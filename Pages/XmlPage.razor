@@ -31,10 +31,11 @@
         <MudPaper Class="d-flex align-center mud-width-full py-8" Elevation="10">
             <MudList Clickable="true">
                 <MudListSubheader>
-                    <MudText Typo="Typo.h5"> MultiBlock</MudText>
+                    <MudText Typo="Typo.h5"><b>@BlockName</b></MudText>
                 </MudListSubheader>
                 @if (@ShowGrid)
                 {
+                    <MudListItem Icon="@Icons.Filled.AdminPanelSettings" IconColor="Color.Secondary" Text="Blocks" OnClick="@(() => onclick("BlockDtos", BlockDtos))" />
                     <MudListItem Icon="@Icons.Filled.ConnectWithoutContact" IconColor="Color.Secondary" Text="Parameters" OnClick="@(() => onclick("Parameters", ParameterDtos))" />
                     <MudListItem Icon="@Icons.Filled.PrivateConnectivity" IconColor="Color.Secondary" Text="Connections" OnClick="@(() => onclick("Connections", ConnectionDtos))" />
 
@@ -56,49 +57,69 @@
 
         @switch (@_param)
         {
+            case "BlockDtos":
+                <GridComponent T="BlockDefDto" Items="BlockDefDtos" Props="BlockDefDtoProps" TableName="Block" ExportFile="Pdf" BlockName="@BlockName"></GridComponent><br />
+                <GridComponent T="BlockDto" Items="BlockDtos" Props="BlockDtoProps" TableName="All Blocks" ExportFile="Pdf" BlockName="@BlockName"></GridComponent><br />
+                break;
             case "Parameters":
-                <GridComponent T="ParameterDto" Items="ParameterDtos" Props="ParameterDtoProps" TableName="All Parameters" ExportFile="Pdf"></GridComponent>
+                <GridComponent T="BlockDefDto" Items="BlockDefDtos" Props="BlockDefDtoProps" TableName="Block"  ExportFile="Pdf" BlockName="@BlockName"></GridComponent><br />
+                <GridComponent T="ParameterDto" Items="ParameterDtos" Props="ParameterDtoProps" TableName="All Parameters" ExportFile="Pdf" BlockName="@BlockName"></GridComponent>
+                <br />
                 @foreach (var paramDto in ParametersDtos)
                 {
                     @if (paramDto != null)
                     {
-                        <GridComponent T="Parameter" Items="paramDto.Parameters.Parameter" Props="ParameterProps" TableName="@paramDto.BlockName"  ExportFile="Pdf"></GridComponent>
+                        <GridComponent T="Parameter" Items="paramDto.Parameters.Parameter" Props="ParameterProps" TableName="@paramDto.BlockName" ExportFile="Pdf" BlockName="@BlockName"></GridComponent>
+                        <br />
                     }
                 }
                 break;
             case "Connections":
-                <GridComponent T="ConnectionDto" Items="ConnectionDtos" Props="ConnectionDtoProps" TableName="All Connections"  ExportFile="Pdf"></GridComponent>
+                <GridComponent T="BlockDefDto" Items="BlockDefDtos" Props="BlockDefDtoProps" TableName="Block" ExportFile="Pdf" BlockName="@BlockName"></GridComponent><br />
+                <GridComponent T="ConnectionDto" Items="ConnectionDtos" Props="ConnectionDtoProps" TableName="All Connections"  ExportFile="Pdf" BlockName="@BlockName"></GridComponent>
+                <br />
                 @foreach (var connDto in ConnectionsDtos)
                 {
                     @if (connDto != null)
                     {
-                        <GridComponent T="Connection" Items="connDto.Connections.Connection" Props="ConnectionProps" TableName="@connDto.BlockName"  ExportFile="Pdf"></GridComponent>
+                        <GridComponent T="Connection" Items="connDto.Connections.Connection" Props="ConnectionProps" TableName="@connDto.BlockName" ExportFile="Pdf" BlockName="@BlockName"></GridComponent>
+                        <br />
                     }
                 }
                 break;
             case "ErdbVersion":
-                <GridComponent T="ErdbVersion" Items="ErdbVersions" Props="ErdbVersionProps" TableName="Erdb Version"></GridComponent>
+                <GridComponent T="BlockDefDto" Items="BlockDefDtos" Props="BlockDefDtoProps" TableName="Block" ExportFile="Pdf" BlockName="@BlockName"></GridComponent>
+                 <br />
+                <GridComponent T="ErdbVersion" Items="ErdbVersions" Props="ErdbVersionProps" TableName="Erdb Version"  ExportFile="Pdf" BlockName="@BlockName"></GridComponent>
+                 <br />
                 break;
             case "Block":
-                <GridComponent T="BlockDef" Items="BlockDefs" Props="BlockDefProps" TableName="BlockDef"></GridComponent>
-                <GridComponent T="Coord" Items="Coords" Props="CoordProps" TableName="Coord"></GridComponent>
+                <GridComponent T="BlockDefDto" Items="BlockDefDtos" Props="BlockDefDtoProps" TableName="BlockDef" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
+                <GridComponent T="BlockDef" Items="BlockDefs" Props="BlockDefProps" TableName="BlockDef"  ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
+                <GridComponent T="Coord" Items="Coords" Props="CoordProps" TableName="Coord" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
                 @if (Parameters != null)
                 {
-                    <GridComponent T="Parameter" Items="Parameters.Parameter" Props="ParameterProps" TableName="Parameters"></GridComponent>
+                    <GridComponent T="Parameter" Items="Parameters.Parameter" Props="ParameterProps" TableName="Parameters" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
                 }
                 @if (SymbolAttrs != null)
                 {
-                    <GridComponent T="SymbolAttr" Items="SymbolAttrs.SymbolAttr" Props="SymbolAttrProps" TableName="SymbolAttrs"></GridComponent>
+                    <GridComponent T="SymbolAttr" Items="SymbolAttrs.SymbolAttr" Props="SymbolAttrProps" TableName="SymbolAttrs" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
                 }
                 @if (Connections != null)
                 {
-                    <GridComponent T="Connection" Items="Connections.Connection" Props="ConnectionProps" TableName="Connections"></GridComponent>
-                    <GridComponent T="Vertex" Items="VertexList" Props="VertexProps" TableName="Vertex"></GridComponent>
+                    <GridComponent T="Connection" Items="Connections.Connection" Props="ConnectionProps" TableName="Connections" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
+                    <GridComponent T="Vertex" Items="VertexList" Props="VertexProps" TableName="Vertex" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
+                }
+                else
+                {
+                    <GridComponent T="Connection" Items="null" Props="ConnectionProps" TableName="Connections" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
                 }
                 break;
             default:
-                <GridComponent T="ParameterDto" Items="ParameterDtos" Props="ParameterDtoProps" TableName="All Parameters" ExportFile="Pdf"></GridComponent>
-                <GridComponent T="ConnectionDto" Items="ConnectionDtos" Props="ConnectionDtoProps" TableName="All Connections"  ExportFile="Pdf"></GridComponent>
+                <GridComponent T="BlockDefDto" Items="BlockDefDtos" Props="BlockDefDtoProps" TableName="Block" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
+                <GridComponent T="BlockDto" Items="BlockDtos" Props="BlockDtoProps" TableName="All Blocks" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
+                <GridComponent T="ParameterDto" Items="ParameterDtos" Props="ParameterDtoProps" TableName="All Parameters" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
+                <GridComponent T="ConnectionDto" Items="ConnectionDtos" Props="ConnectionDtoProps" TableName="All Connections" ExportFile="Pdf" BlockName="@BlockName"></GridComponent> <br />
                 break;
         }
     </MudItem>
@@ -109,6 +130,7 @@
 
     private bool ShowGrid { get; set; }
     private string _param = string.Empty;
+    private string BlockName = string.Empty;
 
     private bool Clearing = false;
     private static string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full";
@@ -132,6 +154,7 @@
     private Connections Connections = new();
     private Vertex Vertex = new();
 
+    // Dtos
     private ParameterDto ParameterDto = new();
     private List<ParameterDto> ParameterDtos = new();
     private ParametersDto ParametersDto = new();
@@ -140,6 +163,11 @@
     private ConnectionDto ConnectionDto = new();
     private List<ConnectionDto> ConnectionDtos = new();
     private List<ConnectionsDto> ConnectionsDtos = new();
+
+    private BlockDto BlockDto = new();
+    private List<BlockDto> BlockDtos = new();
+    private BlockDefDto BlockDefDto = new();
+    private List<BlockDefDto> BlockDefDtos = new();
 
     private List<string> ErdbVersionProps = new();
     private List<string> BlockProps = new();
@@ -152,6 +180,8 @@
     private List<string> VertexProps = new();
     private List<string> ParameterDtoProps = new();
     private List<string> ConnectionDtoProps = new();
+    private List<string> BlockDtoProps = new();
+    private List<string> BlockDefDtoProps = new();
 
 
     protected override void OnInitialized()
@@ -202,6 +232,15 @@
             ConnectionDtoProps.Add(propertyInfo.Name);
         }
 
+        foreach (var propertyInfo in typeof(BlockDto).GetProperties())
+        {
+            BlockDtoProps.Add(propertyInfo.Name);
+        }
+
+        foreach (var propertyInfo in typeof(BlockDefDto).GetProperties())
+        {
+            BlockDefDtoProps.Add(propertyInfo.Name);
+        }
     }
 
     private void OnInputFileChanged(InputFileChangeEventArgs e)
@@ -249,24 +288,72 @@
 
             try
             {
+
+                ParameterDtos.Clear();
+                ParametersDtos.Clear();
+                ConnectionDtos.Clear();
+                ConnectionsDtos.Clear();
+                BlockDtos.Clear();
+                BlockDefDtos.Clear();
+
                 _param = string.Empty;
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(MultiBlock));
                 XDocument xDocument = XDocument.Parse(outputFileString);
                 MultiBlock = (MultiBlock)xmlSerializer.Deserialize(xDocument.CreateReader());
 
+                // BlockDef
+                BlockDefDto blockDefDto = new()
+                    {
+                        BlockName = MultiBlock.Block.BlockDef.BlockName,
+
+                        EntityName = MultiBlock.Block.BlockDef.EntityName,
+
+                        BlockId = MultiBlock.Block.BlockDef.BlockId,
+
+                        BlockGUID = MultiBlock.Block.BlockDef.BlockGUID,
+
+                        BlockDesc = MultiBlock.Block.BlockDef.BlockDesc,
+
+                        TemplateName = MultiBlock.Block.BlockDef.TemplateName,
+
+                        ClassName = MultiBlock.Block.BlockDef.ClassName,
+
+                        BaseTemplateName = MultiBlock.Block.BlockDef.BaseTemplateName,
+
+                        Attribute = MultiBlock.Block.BlockDef.Attribute,
+
+                        LifeCycleState = MultiBlock.Block.BlockDef.LifeCycleState,
+
+                        AssignedTo = MultiBlock.Block.BlockDef.AssignedTo,
+
+                    };
+
+                BlockDefDtos.Add(blockDefDto);
+
+
                 // Parameters
                 ParametersDto.BlockName = MultiBlock.Block.BlockDef.BlockName;
                 ParametersDto.Parameters = MultiBlock.Block.Parameters;
-
                 ParametersDtos.Add(ParametersDto);
+
+                // Blocks
+                BlockName = MultiBlock.Block.BlockDef.BlockName;
+                BlockDto.BlockName = MultiBlock.Block.BlockDef.BlockName;
+                BlockDto.BlockId = MultiBlock.Block.BlockDef.BlockId;
+                BlockDtos.Add(BlockDto);
+
 
                 foreach (var param in MultiBlock.Block.EmbBlocks.Block)
                 {
                     ParametersDto = new();
                     ParametersDto.BlockName = param.BlockDef.BlockName;
                     ParametersDto.Parameters = param.Parameters;
-
                     ParametersDtos.Add(ParametersDto);
+
+                    BlockDto = new();
+                    BlockDto.BlockName = param.BlockDef.BlockName;
+                    BlockDto.BlockId = param.BlockDef.BlockId;
+                    BlockDtos.Add(BlockDto);
                 }
 
                 foreach (var param in MultiBlock.Block.Parameters.Parameter)
@@ -378,6 +465,9 @@
                 break;
             case "Connections":
                 ConnectionDtos = blockObj;
+                break;
+            case "BlockDtos":
+                BlockDtos = blockObj;
                 break;
             case "Block":
                 BlockDefs.Add(blockObj.BlockDef);
