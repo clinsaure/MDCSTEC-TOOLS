@@ -10,8 +10,8 @@
     <MudItem xs="12">
         <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">HMI ANALYSIS</MudText>
     </MudItem>
-    <MudItem Class="mud-theme-primary rounded-lg" xs="12">
-        <MudPaper @ondragenter="@SetDragClass" @ondragleave="@ClearDragClass" @ondragend="@ClearDragClass" Height="125px" Outlined="true" Class="@DragClass">
+    <MudItem Class="rounded-lg" xs="12">
+        <MudPaper @ondragenter="@SetDragClass" @ondragleave="@ClearDragClass" @ondragend="@ClearDragClass" Height="125px" Outlined="true" Class="@DragClass" Elevation="10">
             @if (!Clearing)
             {
                 <InputFile OnChange="OnInputFileChanged" multiple class="absolute mud-width-full mud-height-full overflow-hidden z-2" style="opacity:0;" accept=".html, .htm" />
@@ -24,7 +24,7 @@
         </MudPaper>
         <MudProgressLinear hidden="@(!loadedFiles.Any())" Color="Color.Tertiary" Striped="true" Size="Size.Large" Indeterminate="true" Class="my-7" />
     </MudItem>
-    <MudItem Class="mud-theme-primary rounded-lg" xs="12">
+    <MudItem Class="rounded-lg" xs="12">
         <GridComponent T="HtmlItem" Items="HtmlItems" Props="props" TableName="HMI ANALYSIS"></GridComponent>
     </MudItem>
 </MudGrid>
