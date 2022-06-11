@@ -25,7 +25,7 @@
       "url": "js\/saveAsFile.js"
     },
     {
-      "hash": "sha256-07Jf6x5qCrd7g1Zp+YWaNUDLQcdwnFQ0ycJ6IepOFb4=",
+      "hash": "sha256-hCk2h4oP9bEPnAJQSpzxsH8xyw\/1A42LzXlOqXjlDBQ=",
       "url": "js\/tableScript.js"
     },
     {
@@ -405,5 +405,5 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     }
   ],
-  "version": "cVXFOf5T"
+  "version": "q1dMXBdd"
 };

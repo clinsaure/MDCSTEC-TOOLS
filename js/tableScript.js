@@ -10,7 +10,7 @@
 
             for (let item of Object.keys(Item)) {
                 arrayheader.push({ text: item, style: 'tableHeader' });
-                widths.push('*');
+                widths.push('auto');
             };
             bodyContent.push(arrayheader);
             headerContent++;
@@ -20,6 +20,7 @@
 
     var docDefinition = {
         pageOrientation: 'landscape',
+        pageSize: 'A2',
         footer: function (currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },
         //header: function (currentPage, pageCount, pageSize) {
         //    // you can apply any logic and return any valid pdfmake element
