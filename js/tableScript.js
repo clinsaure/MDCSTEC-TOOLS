@@ -1,4 +1,4 @@
-﻿function tableScript(Items, TbName) {
+﻿function tableScript(Items, TbName, FileName) {
 
     let headerContent = 0;
     let bodyContent = [];
@@ -74,5 +74,5 @@
         },
     };
 
-    pdfMake.createPdf(docDefinition).download('Table.pdf');
+    pdfMake.createPdf(docDefinition).download(TbName +'.pdf');
 }
