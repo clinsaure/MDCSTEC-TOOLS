@@ -1,10 +1,6 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-FMIoDsSQ7qmqbTZEvVdDLy\/D6QGyKvolefDBfIR8AhU=",
-      "url": "download.js"
-    },
-    {
       "hash": "sha256-FHAQv5tCX8yHcGkL\/8AFhL0PtUWgEoaN6XjY+hoCblo=",
       "url": "favicon.ico"
     },
@@ -17,8 +13,24 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-CqPgfP6lkglIeeDx+yfOlQxe0r7kdWLEvZ2ctWxwzEM=",
+      "hash": "sha256-6HJoIgLKNktNqgx+nSkVt4KpEStYIVGo2Bi6RCZQp7c=",
       "url": "index.html"
+    },
+    {
+      "hash": "sha256-8zLq2Iez6ZNgbzXLpMMSqE2pUQ4mPeuoeX6OSEK5Iow=",
+      "url": "js\/pdfmake.min.js"
+    },
+    {
+      "hash": "sha256-FMIoDsSQ7qmqbTZEvVdDLy\/D6QGyKvolefDBfIR8AhU=",
+      "url": "js\/saveAsFile.js"
+    },
+    {
+      "hash": "sha256-4WwCm1pA8ezIdsQIGWmfUSenGuEf0lvj955Nymbn9SM=",
+      "url": "js\/tableScript.js"
+    },
+    {
+      "hash": "sha256-6NvkWQK7zqG5S0XpGWMZ1X0DTOHlAEluAn8CfRqNP0Y=",
+      "url": "js\/vfs_fonts.js"
     },
     {
       "hash": "sha256-Q93WpiyISQvEav\/Bd4DlfaNCZQzc5KN2pQxc18g2Jh4=",
@@ -57,7 +69,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-XpSZwoH+jNxX8DUkN9I5bnz37fj8Mv5GmDNWOo\/HHzM=",
+      "hash": "sha256-T6DRM\/koC\/DMHY0MU6pI6bkyb\/B6OAwCqBUJILu3\/es=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -73,7 +85,7 @@
       "url": "_framework\/ExcelNumberFormat.dll"
     },
     {
-      "hash": "sha256-qQEOscaT1h8uC6TRYuJ+hkyvJ0U710xflHQahOUnRmE=",
+      "hash": "sha256-xfzEvGtPFrY919QgQMBzZeGyWj0Yrd0\/REClfC2eDWU=",
       "url": "_framework\/MdcstecTools.dll"
     },
     {
@@ -393,5 +405,5 @@
       "url": "_content\/MudBlazor\/MudBlazor.min.js"
     }
   ],
-  "version": "T7kzsOF4"
+  "version": "nI5GZbZY"
 };
