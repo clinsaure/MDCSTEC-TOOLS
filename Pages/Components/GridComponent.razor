@@ -133,7 +133,7 @@
     public async Task ExportToPdf()
     {
         string TbName = BlockName + " - " + TableName;
-        await JSRuntime.InvokeAsync<object>("tableScript", Items, TbName);
+        await JSRuntime.InvokeAsync<object>("tableScript", Items, TbName, BlockName);
     }
 
 }
